@@ -1,0 +1,127 @@
+/* Definición de estilos */
+
+html {
+	height: 100%;
+}
+body {
+	height: 100%;
+	margin: 0;
+	font-family: "Times New Roman", Arial, Helvetica, sans-serif;
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+	background: radial-gradient(#AED6F1, #FAE5D3, #58D68D);
+}
+h1 { 
+	display: : block;
+	position: absolute;
+	left: 100px;
+	font-size: 2em;
+	margin-before: 0.67em;
+	margin-after: 0.67em;
+	margin-start: 0.67em;
+	margin-end: 0.67em;
+	font-family: 'Akronim';
+	font-size: 30px;
+	background-color: rgba(204,204,204,.5); /* Sets to 50% transparent */
+	color: #739900;
+}
+h3 {
+	display: : block;
+	position: absolute;
+	left: 130px;
+	font-family: bree-serif, serif;
+	font-size: 12px;
+	margin-top: 5em;
+	color: #4d9900;
+}
+h6 {
+	display: : block;
+	position: absolute;
+	left: 150px;
+	font-family: 'Mr Dafoe';
+	font-size: 10px;
+	margin-top: 8em;
+	color: #999900;
+}
+p { 
+	display:block;
+	margin-before: 1em;
+	margin-after: 1em;
+	margin-start: 0;
+	margin-end: 0;
+	background-color: #CCC;
+}
+em { color: orange; background-color: #E8E8E8; }
+strong { color: red; background-color: #E8E8E8; }
+div { 
+	float: left;
+	padding: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	border: 1px solid #666;
+}
+.cajafondo {
+	position: absolute;
+	left: 100px;
+	top: 100px;
+	right: 100px;
+	bottom: 100px;
+}
+.caja1 {
+	height: : 100px;
+	width: 150px;
+	background-color: #FF9;
+	float: left;
+	font-family: 'Cherry Swash';
+	font-size: 22px;
+	border-radius: 5px;
+}
+.caja2 {
+	height: : 100px;
+	/*width: 150px;*/
+	background-color: #CEF3CA;
+	float: left;
+}
+.caja3 {
+	height: : 100px;
+	width: 150px;
+	background-color: #CAF2F3;
+	float: left;
+	border-radius: 6px;
+}
+.caja4 {
+	height: : 100px;
+	width: 150px;
+	background-color: #F3CAE7;
+	float: left;
+	border-radius: 7px;
+	background: linear-gradient(-45deg, #F3CAE7, #F7EE84);
+}
+.caja5 {
+	height: : 100px;
+	width: 150px;
+	background-color: #F3DCCA;
+	float: left;
+	border-radius: 8px;
+}
+.caja6 {
+	height: : 200px;
+	width: 450px;
+	background-color: #F3CACA;
+	float: left;
+}
+.caja7 {
+	height: : 200px;
+	width: 450px;
+	background-color: #e6ffee;
+	float: left;
+}
+.blog {
+	width: 445px;
+}
+.videos {
+	border:1px solid white;
+	background-color:white;
+	width:300px;
+	height:160px;
+}
