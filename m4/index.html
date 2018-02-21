@@ -1,0 +1,114 @@
+<html>
+<head>
+	<title>Buenos días, bienvenido a la calculadora de Pablo Piqueras Bartolomé</title>
+	<meta charset="utf-8">
+
+	<script type="text/javascript">
+        var acc = 0, op = "";
+
+		function vaciar() {
+			document.getElementById("n1").value = "";
+		}
+
+		function cuadrado() {
+			var num = document.getElementById("n1");
+			var fNum = parseFloat(num.value);
+
+			num.value = fNum * fNum;
+
+			resetear_valores();
+		}
+
+		function inverso() {
+			var num = document.getElementById("n1");
+			num.value = 1/parseFloat(num.value);
+
+			resetear_valores();
+		}
+
+		function raiz_cuadrada() {
+			var num = document.getElementById("n1");
+			num.value = Math.sqrt(parseFloat(num.value));
+
+			resetear_valores();
+		}
+
+		function parte_entera() {
+			var num = document.getElementById("n1");
+			var fNum = parseFloat(num.value);
+
+			num.value = (fNum >= 0) ? Math.floor(fNum) : -Math.ceil(fNum);
+
+			resetear_valores();
+		}
+
+		function resetear_valores() {
+			acc = 0;
+			op = "";
+		}
+
+		function sumar() {
+			acc = parseFloat(document.getElementById("n1").value);
+			op = "+";
+		}
+
+		function restar() {
+			acc = parseFloat(document.getElementById("n1").value);
+			op = "-";
+		}
+
+		function multiplicar() {
+			acc = parseFloat(document.getElementById("n1").value);
+			op = "*";
+		}
+
+		function dividir() {
+			acc = parseFloat(document.getElementById("n1").value);
+			op = "/";
+		}
+
+		function potencia() {
+			acc = parseFloat(document.getElementById("n1").value);
+			op = "pot";
+		}
+
+		function calcular() {
+			switch(op) {
+			    case "+":
+			        document.getElementById("n1").value = acc + parseFloat(document.getElementById("n1").value);
+			        break;
+			    case "-":
+			        document.getElementById("n1").value = acc - parseFloat(document.getElementById("n1").value);
+			        break;
+			    case "*":
+			        document.getElementById("n1").value = acc * parseFloat(document.getElementById("n1").value);
+			        break;
+			    case "/":
+			        document.getElementById("n1").value = acc / parseFloat(document.getElementById("n1").value);
+			        break;
+			    case "pot":
+			        document.getElementById("n1").value = Math.pow(acc, parseFloat(document.getElementById("n1").value));
+			        break;
+			    default:
+			}
+
+			resetear_valores();
+		}
+	</script>
+</head>
+<body>
+	Número: <input type="text" id="n1" onclick="vaciar()">
+	<p>
+    <button onclick="cuadrado()">x<sup>2</sup></button>
+    <button onclick="inverso()"> 1/x </button>
+    <button onclick="raiz_cuadrada()"> sqrt(x) </button>
+    <button onclick="parte_entera()"> parte_entera(x) </button>
+	<p>
+    <button onclick="sumar()">+</button>
+    <button onclick="restar()">-</button>
+    <button onclick="multiplicar()">*</button>
+    <button onclick="dividir()">/</button>
+    <button onclick="potencia()">x^y</button>
+    <button onclick="calcular()">=</button>
+</body>
+</html>
