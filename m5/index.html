@@ -1,0 +1,194 @@
+<html>
+<head>
+	<title>Buenos días, bienvenido a la calculadora de Pablo Piqueras Bartolomé</title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+	<script type="text/javascript">
+        var acc = 0, op = "";
+
+        
+        $(function() {
+        	/* Vaciar */
+        	$("#n1").on("click", function(){$("#n1").val("")});
+
+        	/* Cuadrado */
+        	$("#b1").on("click", function() {
+        		var fNum = parseFloat($("#n1").val());
+
+				$("#n1").val(fNum * fNum);
+
+				resetear_valores();
+        	});
+
+        	/* Inverso */
+        	$("#b2").on("click", function() {
+				$("#n1").val( 1/ parseFloat($("#n1").val()) );
+
+				resetear_valores();
+        	});
+
+        	/* Raíz cuadrada */
+        	$("#b3").on("click", function() {
+        		var fNum = parseFloat($("#n1").val());
+
+				$("#n1").val(Math.sqrt(fNum));
+
+				resetear_valores();
+        	});
+
+        	/* Parte entera */
+        	$("#b4").on("click", function() {
+        		var fNum = parseFloat($("#n1").val());
+
+				$("#n1").val( ( (fNum >= 0) ? Math.floor(fNum) : -Math.ceil(fNum) ) );
+
+				resetear_valores();
+        	});
+
+        	/* Potencia n del número 2 */
+        	$("#b5").on("click", function() {
+        		var fNum = parseFloat($("#n1").val());
+
+				$("#n1").val( Math.pow(2, fNum) );
+
+				resetear_valores();
+        	});
+
+        	/* Factorial del número n */
+        	$("#b6").on("click", function() {
+        		var fNum = parseFloat($("#n1").val());
+
+        		if (fNum < 0)
+        			$("#n1").val("")
+        		else if ((fNum === 0) || (fNum === 1))
+        			$("#n1").val(1)
+        		else {
+        			var v = fNum -1;
+
+        			while (v > 1) {
+        				fNum *= v;
+        				v--;
+        			}
+
+					$("#n1").val( fNum );
+        		}
+
+				resetear_valores();
+        	});
+
+        	/* Sumar */
+        	$("#b7").on("click", function() {
+				acc = parseFloat($("#n1").val());
+				op = "+";
+        	});
+
+        	/* Restar */
+        	$("#b8").on("click", function() {
+				acc = parseFloat($("#n1").val());
+				op = "-";
+        	});
+
+        	/* Multiplicar */
+        	$("#b9").on("click", function() {
+				acc = parseFloat($("#n1").val());
+				op = "*";
+        	});
+
+        	/* Dividir */
+        	$("#b10").on("click", function() {
+				acc = parseFloat($("#n1").val());
+				op = "/";
+        	});
+
+        	/* Potencia */
+        	$("#b11").on("click", function() {
+				acc = parseFloat($("#n1").val());
+				op = "pot";
+        	});
+
+        	/* Calcular */
+        	$("#b12").on("click", function() {
+				switch(op) {
+				    case "+":
+				        $("#n1").val( acc + parseFloat($("#n1").val()) );
+				        break;
+				    case "-":
+				        $("#n1").val( acc - parseFloat($("#n1").val()) );
+				        break;
+				    case "*":
+				        $("#n1").val( acc * parseFloat($("#n1").val()) );
+				        break;
+				    case "/":
+				        $("#n1").val( acc / parseFloat($("#n1").val()) );
+				        break;
+				    case "pot":
+				        $("#n1").val( Math.pow(acc, parseFloat($("#n1").val())) );
+				        break;
+				    default:
+				}
+
+				resetear_valores();
+        	});
+
+        	/* Sumantorio de N números en formato CSV */
+        	$("#b13").on("click", function() {
+        		var sum = 0;
+
+                var csv = $("#n1").val();
+
+                if ((typeof csv != 'undefined') && (csv.length > 0)) {
+                	csv.split(",").forEach( function(x){ sum += parseFloat(x); } )
+                }
+
+                $("#n1").val( sum );
+
+				resetear_valores();
+        	});
+
+        	/* Producto de N números en formato CSV */
+        	$("#b14").on("click", function() {
+				var prod = 0;
+
+                var csv = $("#n1").val();
+
+                if ((typeof csv != 'undefined') && (csv.length > 0)) {
+                	prod = 1;
+                	csv.split(",").forEach( function(x){ prod *= parseFloat(x); } )
+                }
+
+                $("#n1").val( prod );
+
+				resetear_valores();
+        	});
+        });
+
+		function resetear_valores() {
+			acc = 0;
+			op = "";
+		}
+
+	</script>
+</head>
+<body>
+	Número: <input type="text" id="n1">
+	<p>
+    <button id="b1">x<sup>2</sup></button>
+    <button id="b2"> 1/x </button>
+    <button id="b3"> sqrt(x) </button>
+    <button id="b4"> parte_entera(x) </button>
+    <button id="b5">2<sup>n</sup></button>
+    <button id="b6">n!</button>
+	<p>
+    <button id="b7">+</button>
+    <button id="b8">-</button>
+    <button id="b9">*</button>
+    <button id="b10">/</button>
+    <button id="b11">x^y</button>
+    <button id="b12">=</button>
+	<p>
+    <button id="b13">Sumantorio de N números en formato CSV</button>
+	<p>
+    <button id="b14">Producto de N números en formato CSV</button>
+</body>
+</html>
