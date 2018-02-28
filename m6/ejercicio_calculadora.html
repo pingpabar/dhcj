@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Bootstrap Calculadora</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="css/bootstrap.css" rel="stylesheet">
+<style type="text/css">
+* { user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
+    margin:0;
+    padding:0;
+}
+
+#sortable { 
+  list-style-type: none;
+   margin-left:auto;
+   margin-right:auto;
+}
+
+#sortable li { 
+  float: left; 
+  width: 33%; 
+}
+
+#sortable li img {
+  vertical-align:bottom;
+  width: 100%; 
+  height: auto;
+}
+
+#n1 {
+  border-style: groove;
+  width: 250px;
+  height: 20px;
+}
+
+.ejercicio {
+  border: solid;
+  border-radius: 20px; 
+  background: linear-gradient(to right, rgba(230, 190, 140, 10)0%, rgba(150,130,70,5)100%);
+  border:5px;
+  text-align: center;
+  margin: auto;
+  padding: 1em;
+  width: 320px;
+}
+
+button {
+  width: 44px;
+}
+
+
+@media (orientation:landscape){ #sortable {width:100vh;}}
+@media (orientation:portrait) { #sortable {width:100%;}}
+</style>
+<script src="js/jquery-1.11.2.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.ui.touch-punch.min.js"></script>
+<script src="js/bootstrap.js"></script>
+
+<script>
+  $(function() {
+   $( "#sortable" ).sortable();
+   $( "#sortable" ).disableSelection();
+  });
+</script>  
+
+  <!-- Lógica Javascript de la Calculadora -->
+  <script type="text/javascript">
+        var acc = 0, op = "";
+
+        
+        $(function() {
+          /* Vaciar */
+          $("#n1").on("click", function(){$("#n1").val("")});
+
+          /* Cuadrado */
+          $("#b1").on("click", function() {
+            var fNum = parseFloat($("#n1").val());
+
+        $("#n1").val(fNum * fNum);
+
+        resetear_valores();
+          });
+
+          /* Inverso */
+          $("#b2").on("click", function() {
+        $("#n1").val( 1/ parseFloat($("#n1").val()) );
+
+        resetear_valores();
+          });
+
+          /* Raíz cuadrada */
+          $("#b3").on("click", function() {
+            var fNum = parseFloat($("#n1").val());
+
+        $("#n1").val(Math.sqrt(fNum));
+
+        resetear_valores();
+          });
+
+          /* Parte entera */
+          $("#b4").on("click", function() {
+            var fNum = parseFloat($("#n1").val());
+
+        $("#n1").val( ( (fNum >= 0) ? Math.floor(fNum) : -Math.ceil(fNum) ) );
+
+        resetear_valores();
+          });
+
+          /* Potencia n del número 2 */
+          $("#b5").on("click", function() {
+            var fNum = parseFloat($("#n1").val());
+
+        $("#n1").val( Math.pow(2, fNum) );
+
+        resetear_valores();
+          });
+
+          /* Factorial del número n */
+          $("#b6").on("click", function() {
+            var fNum = parseFloat($("#n1").val());
+
+            if (fNum < 0)
+              $("#n1").val("")
+            else if ((fNum === 0) || (fNum === 1))
+              $("#n1").val(1)
+            else {
+              var v = fNum -1;
+
+              while (v > 1) {
+                fNum *= v;
+                v--;
+              }
+
+          $("#n1").val( fNum );
+            }
+
+        resetear_valores();
+          });
+
+          /* Sumar */
+          $("#b7").on("click", function() {
+        acc = parseFloat($("#n1").val());
+        op = "+";
+          });
+
+          /* Restar */
+          $("#b8").on("click", function() {
+        acc = parseFloat($("#n1").val());
+        op = "-";
+          });
+
+          /* Multiplicar */
+          $("#b9").on("click", function() {
+        acc = parseFloat($("#n1").val());
+        op = "*";
+          });
+
+          /* Dividir */
+          $("#b10").on("click", function() {
+        acc = parseFloat($("#n1").val());
+        op = "/";
+          });
+
+          /* Potencia */
+          $("#b11").on("click", function() {
+        acc = parseFloat($("#n1").val());
+        op = "pot";
+          });
+
+          /* Calcular */
+          $("#b12").on("click", function() {
+        switch(op) {
+            case "+":
+                $("#n1").val( acc + parseFloat($("#n1").val()) );
+                break;
+            case "-":
+                $("#n1").val( acc - parseFloat($("#n1").val()) );
+                break;
+            case "*":
+                $("#n1").val( acc * parseFloat($("#n1").val()) );
+                break;
+            case "/":
+                $("#n1").val( acc / parseFloat($("#n1").val()) );
+                break;
+            case "pot":
+                $("#n1").val( Math.pow(acc, parseFloat($("#n1").val())) );
+                break;
+            default:
+        }
+
+        resetear_valores();
+          });
+
+          /* Sumantorio de N números en formato CSV */
+          $("#b13").on("click", function() {
+            var sum = 0;
+
+                var csv = $("#n1").val();
+
+                if ((typeof csv != 'undefined') && (csv.length > 0)) {
+                  csv.split(",").forEach( function(x){ sum += parseFloat(x); } )
+                }
+
+                $("#n1").val( sum );
+
+        resetear_valores();
+          });
+
+          /* Producto de N números en formato CSV */
+          $("#b14").on("click", function() {
+        var prod = 0;
+
+                var csv = $("#n1").val();
+
+                if ((typeof csv != 'undefined') && (csv.length > 0)) {
+                  prod = 1;
+                  csv.split(",").forEach( function(x){ prod *= parseFloat(x); } )
+                }
+
+                $("#n1").val( prod );
+
+        resetear_valores();
+          });
+        });
+
+    function resetear_valores() {
+      acc = 0;
+      op = "";
+    }
+
+  </script>
+</head>
+<body>
+
+<div class="container">
+<nav class="navbar navbar-inverse ">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#miMenu">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand" href="index.html">MOOC</a>
+    </div>
+    <div class="collapse navbar-collapse" id="miMenu">
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">INICIO</a></li>
+        <li><a href="ejercicio_puzzle.html">PUZZLE</a></li>
+        <li class="active"><a href="#">CALCULADORA</a></li> 
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="ejercicio">
+  Número:<input type="text" id="n1">
+  <p>
+    <div id="unButs">
+      <button id="b1" title="Cuadrado">x<sup>2</sup></button>
+      <button id="b2" title="Inversa">1/x</button>
+      <button id="b3" title="Raíz cuadrada">sqrt(x)</button>
+      <button id="b4" title="Parte entera">pint(x)</button>
+      <button id="b5" title="2 elevado a N">2<sup>n</sup></button>
+      <button id="b6" title="Factorial">n!</button>
+    </div>
+  <p>
+    <div id="binButs">
+      <button id="b7" title="Sumar">+</button>
+      <button id="b8" title="Restar">-</button>
+      <button id="b9" title="Multiplicar">*</button>
+      <button id="b10" title="Dividir">/</button>
+      <button id="b11" title="X elevado a Y">x^y</button>
+      <button id="b12" title="Igual (calcular resultado de la operación binaria)">=</button>
+    </div>
+  <p>
+    <div id="multiopButs">
+      <button id="b13" title="Sumatorio de N números en formato CSV, es decir, separados por comas">⅀x</button>
+      <button id="b14" title="Productorio de N números en formato CSV, es decir, separados por comas">∏x</button>
+    </div>
+  <div class="clear"> </div>
+</div>
+<div class="panel-footer">Ejercicio - Pablo Piqueras Bartolomé</div>
+</div>
+</body>
+</html>
+
